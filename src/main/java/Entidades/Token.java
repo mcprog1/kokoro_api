@@ -5,60 +5,62 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author nicol
  */
 @Entity
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@XmlRootElement
-public class Usuario implements Serializable {
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Token> tokens;
+public class Token implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nombre;
-    private String nickname;
-    private String clave;
+    private String token;
+    private Date fecha_creado;
+    private Date fecha_expiracion;
+    @ManyToOne
+    private Usuario usuario;
 
-    public String getNombre() {
-        return nombre;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Date getFecha_creado() {
+        return fecha_creado;
+    }
+
+    public void setFecha_creado(Date fecha_creado) {
+        this.fecha_creado = fecha_creado;
+    }
+
+    public Date getFecha_expiracion() {
+        return fecha_expiracion;
+    }
+
+    public void setFecha_expiracion(Date fecha_expiracion) {
+        this.fecha_expiracion = fecha_expiracion;
+    }
+
     public Long getId() {
         return id;
     }
@@ -77,10 +79,10 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+        if (!(object instanceof Token)) {
             return false;
         }
-        Usuario other = (Usuario) object;
+        Token other = (Token) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -89,7 +91,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Usuario[ id=" + id + " ]";
+        return "Entidades.Token[ id=" + id + " ]";
     }
     
 }

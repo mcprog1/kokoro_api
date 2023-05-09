@@ -82,8 +82,8 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return String.valueOf(super.count());
     }
     
+ 
     
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
