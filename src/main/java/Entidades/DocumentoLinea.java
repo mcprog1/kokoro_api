@@ -31,6 +31,16 @@ public class DocumentoLinea implements Serializable {
     private Documento documento;
     @ManyToOne
     private ProductoTalle productoTalle;
+    @ManyToOne
+    private Combo combo;
+
+    public Combo getCombo() {
+        return combo;
+    }
+
+    public void setCombo(Combo combo) {
+        this.combo = combo;
+    }
 
     public Documento getDocumento() {
         return documento;

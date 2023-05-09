@@ -5,72 +5,53 @@
 package Entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
-
 
 /**
  *
  * @author nicol
  */
 @Entity
-@XmlRootElement
-public class Producto implements Serializable {
-
-    @OneToMany(mappedBy = "producto")
-    private List<ComboLinea> comboLineas;
-
-    @OneToMany(mappedBy = "producto")
-    private List<ProductoTalle> productoTalles;
+public class ComboLinea implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nombre, etiqueta;
+    private int cantidad;
     @ManyToOne
-    private Temporada temporada;
+    private Producto producto;
     @ManyToOne
-    private Categoria categoria;
+    private Combo combo;
 
-    public String getNombre() {
-        return nombre;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public String getEtiqueta() {
-        return etiqueta;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setEtiqueta(String etiqueta) {
-        this.etiqueta = etiqueta;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
-    public Temporada getTemporada() {
-        return temporada;
+    public Combo getCombo() {
+        return combo;
     }
 
-    public void setTemporada(Temporada temporada) {
-        this.temporada = temporada;
+    public void setCombo(Combo combo) {
+        this.combo = combo;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-    
     public Long getId() {
         return id;
     }
@@ -89,10 +70,10 @@ public class Producto implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Producto)) {
+        if (!(object instanceof ComboLinea)) {
             return false;
         }
-        Producto other = (Producto) object;
+        ComboLinea other = (ComboLinea) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -101,7 +82,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Producto[ id=" + id + " ]";
+        return "Entidades.ComboLinea[ id=" + id + " ]";
     }
     
 }

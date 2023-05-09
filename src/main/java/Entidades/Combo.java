@@ -5,39 +5,36 @@
 package Entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
-
 
 /**
  *
  * @author nicol
  */
 @Entity
-@XmlRootElement
-public class Producto implements Serializable {
+public class Combo implements Serializable {
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "combo")
+    private List<DocumentoLinea> documentoLineas;
+
+    @OneToMany(mappedBy = "combo")
     private List<ComboLinea> comboLineas;
-
-    @OneToMany(mappedBy = "producto")
-    private List<ProductoTalle> productoTalles;
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nombre, etiqueta;
-    @ManyToOne
-    private Temporada temporada;
-    @ManyToOne
-    private Categoria categoria;
+    private String nombre;
+    private float descuento;
+    private Date fecha_creado;
+    private Date fecha_desde;
+    private Date fecha_hasta;
 
     public String getNombre() {
         return nombre;
@@ -47,30 +44,38 @@ public class Producto implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getEtiqueta() {
-        return etiqueta;
+    public float getDescuento() {
+        return descuento;
     }
 
-    public void setEtiqueta(String etiqueta) {
-        this.etiqueta = etiqueta;
+    public void setDescuento(float descuento) {
+        this.descuento = descuento;
     }
 
-    public Temporada getTemporada() {
-        return temporada;
+    public Date getFecha_creado() {
+        return fecha_creado;
     }
 
-    public void setTemporada(Temporada temporada) {
-        this.temporada = temporada;
+    public void setFecha_creado(Date fecha_creado) {
+        this.fecha_creado = fecha_creado;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Date getFecha_desde() {
+        return fecha_desde;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setFecha_desde(Date fecha_desde) {
+        this.fecha_desde = fecha_desde;
     }
-    
+
+    public Date getFecha_hasta() {
+        return fecha_hasta;
+    }
+
+    public void setFecha_hasta(Date fecha_hasta) {
+        this.fecha_hasta = fecha_hasta;
+    }
+
     public Long getId() {
         return id;
     }
@@ -89,10 +94,10 @@ public class Producto implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Producto)) {
+        if (!(object instanceof Combo)) {
             return false;
         }
-        Producto other = (Producto) object;
+        Combo other = (Combo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -101,7 +106,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Entidades.Producto[ id=" + id + " ]";
+        return "Entidades.Combo[ id=" + id + " ]";
     }
     
 }
