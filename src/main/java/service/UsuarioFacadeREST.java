@@ -54,12 +54,12 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         super.remove(super.find(id));
     }
 
-    @GET
+    /*@GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Usuario find(@PathParam("id") Long id) {
         return super.find(id);
-    }
+    }*/
 
     @GET
     @Override
@@ -82,6 +82,12 @@ public class UsuarioFacadeREST extends AbstractFacade<Usuario> {
         return String.valueOf(super.count());
     }
     
+    @GET
+    @Path("/login")
+    @Produces(MediaType.TEXT_PLAIN)   
+    public String loginRest(){
+         return "Hola";
+    }
  
     
     @Override
